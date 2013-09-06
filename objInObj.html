@@ -1,0 +1,22 @@
+<head>
+  <title>objInObj</title>
+</head>
+
+<body>
+  {{> hello}}
+</body>
+
+<template name="hello">
+  <input placeholder="enter new age" type="number" id="age" /><button id="changeAge">Change Age!</button>
+  <h1>Hello {{player.person.name}}!</h1>
+  Your current score is {{player.score}}
+  <br />
+  {{#with player.person}}
+      Your age is: {{age}}
+      <br />
+      Your name is: {{name}}
+  {{/with}}
+  <br />
+  The player object's structure:
+  {{JSONStructure player}}
+</template>
