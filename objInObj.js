@@ -10,6 +10,9 @@ if (Meteor.isClient) {
           set["person.age"] = newAge;
           var playerID = Players.findOne()._id;
           Players.update({_id: playerID}, {$set: set});
+          Meteor.call('updateWordCountByWordName', 'hey');
+
+          
       }
   });
   Template.hello.helpers({
@@ -20,6 +23,14 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
+
+  Meteor.methods({
+    updateWordCountByWordName: function (word) {
+      Players.update({ "words.word": word }, { $inc: { "words.$.count":1 } });
+    }
+  });
+
+
   Meteor.startup(function () {
     Players.remove({});
     Players.insert({
@@ -27,7 +38,8 @@ if (Meteor.isServer) {
             name: 'George',
             age: 76
         },
-        score: 5
+        score: 5,
+        words: [{word: "hey", count: 5}, {word: "there", count: 6}]
     });
   });
 }

@@ -7,10 +7,16 @@
 </body>
 
 <template name="hello">
+  {{#with player}}
+    {{#each words}}
+      {{word}} appears {{count}} time(s)<br />
+    {{/each}}
+  {{/with}}
+  <br />
   <input placeholder="enter new age" type="number" id="age" /><button id="changeAge">Change Age!</button>
   <h1>Hello {{player.person.name}}!</h1>
   Your current score is {{player.score}}
-  <br />
+  <br />  
   {{#with player.person}}
       Your age is: {{age}}
       <br />
